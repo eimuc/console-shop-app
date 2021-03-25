@@ -18,9 +18,5 @@ namespace ConsoleShopApp
             Price = price;
             Quantity = quantity;
         }
-        public string GetInfo()
-        {
-            return $"Name: {Name}, price: {Price}£, quantity: {Quantity}.";
-        }
     }
 }
