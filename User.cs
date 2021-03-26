@@ -13,5 +13,17 @@ namespace ConsoleShopApp
         {
             Balance = number;
         }
+        public string Topup(User user, decimal quantity)
+        {
+            if (quantity >= 0)
+            {
+                user.Balance += quantity;
+                return Message.Topup;
+            }
+            else
+            {
+                return Message.InvalidTopup;
+            }
+        }
     }
 }

@@ -13,33 +13,60 @@ namespace ConsoleShopApp
         {
             Items = new List<Item>();
         }
-        public string Itemlist()
+        public string ListItem()
         {
             var itemList = new StringBuilder();
             foreach (var item in Items.Where(item => item.Quantity > 0))
             {
-                itemList.Append($"\n{item.Name}\tquantity: {item.Quantity}, price: {item.Price}£\n\n");
+                itemList.Append($"\n{item.Name}\tquantity: {item.Quantity}, price: {item.Price}£\n");
             }
 
             return itemList.Length > 0 ? itemList.ToString() : "\nThere not any items at the shop!";
         }
-        public string BuyItem(string name, int quantity)
+        public string BuyItem(User user, string name, int quantity)
         {
-            return "";
+            var validItems = Items.Find(item =>
+                item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+            if (validItems != null)
+            {
+                if (validItems.Quantity >= quantity)
+                {
+                    var userValidBalance = quantity * validItems.Price <= user.Balance;
+
+                    if (!userValidBalance)
+                    {
+                        return Message.InvalidBalance;
+                    }
+
+                    validItems.Quantity -= quantity;
+                    user.Balance -= validItems.Price * quantity;
+                    return Message.Bought;
+                }
+
+                if (validItems.Quantity == 0)
+                {
+                    return Message.SoldOut;
+                }
+
+                return Message.TooHigh;
+            }
+
+            return Message.NotFound;
         }
         public string AddItem(string name, int quantity)
         {
-            var toAdd = Items.Find(item =>
+            var validItems = Items.Find(item =>
                 item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-            if (toAdd != null)
+            if (validItems != null)
             {
-                toAdd.Quantity += quantity;
+                validItems.Quantity += quantity;
                 
-                return Message.ItemAdded;
+                return Message.Added;
             }
 
-            return Message.ItemNotAdded;
+            return Message.NotFound;
         }
     }
 }

@@ -36,14 +36,14 @@ namespace ConsoleShopApp
                             welcomeMessage = false;
                             break;
                         case "itemlist":
-                            Console.WriteLine(shop.Itemlist());
+                            Console.WriteLine(shop.ListItem());
                             welcomeMessage = false;
                             break;
                         case "buy":
                             var buyName = commands[1];
                             var buyQuantity = int.Parse(commands[2]);
-                            shop.BuyItem(buyName, buyQuantity);
-                            Console.WriteLine(Message.ItemBought);
+                            shop.BuyItem(user, buyName, buyQuantity);
+                            Console.WriteLine(Message.Bought);
                             welcomeMessage = false;
                             break;
                         case "add":
@@ -57,6 +57,9 @@ namespace ConsoleShopApp
                             welcomeMessage = false;
                             break;
                         case "topup":
+                            var topup = decimal.Parse(commands[1]);
+                            Console.WriteLine(user.Topup(user, topup));
+                            welcomeMessage = false;
                             break;
                         default:
                             throw new ArgumentException();
