@@ -22,7 +22,7 @@ namespace ConsoleShopApp
                 itemList.Append($"\n{item.Name}\tquantity: {item.Quantity}, price: {item.Price}£\n");
             }
 
-            return itemList.Length > 0 ? itemList.ToString() : "\nThere not any items at the shop!";
+            return itemList.Length > 0 ? itemList.ToString() : "\nNo items found!";
         }
 
         public string BuyItem(User user, string name, int quantity)

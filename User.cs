@@ -11,7 +11,7 @@
 
         public string Topup(User user, decimal quantity)
         {
-            if (quantity >= 0)
+            if (quantity > 0)
             {
                 user.Balance += quantity;
                 return Message.Topup;
