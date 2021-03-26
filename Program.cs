@@ -45,8 +45,7 @@ namespace ConsoleShopApp
                         case "buy":
                             var buyName = commands[1];
                             var buyQuantity = int.Parse(commands[2]);
-                            shop.BuyItem(user, buyName, buyQuantity);
-                            Console.WriteLine(Message.Bought);
+                            Console.WriteLine(shop.BuyItem(user, buyName, buyQuantity));
                             welcomeMessage = false;
                             break;
 

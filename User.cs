@@ -16,10 +16,8 @@
                 user.Balance += quantity;
                 return Message.Topup;
             }
-            else
-            {
-                return Message.InvalidTopup;
-            }
+
+            return Message.InvalidTopup;
         }
     }
 }

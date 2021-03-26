@@ -28,18 +28,32 @@ namespace ConsoleShopApp
         public string BuyItem(User user, string name, int quantity)
         {
             var validItems = Items.Find(item =>
-                item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+                  item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-            if (validItems.Quantity >= quantity)
+            if (validItems != null)
             {
-                validItems.Quantity -= quantity;
-                user.Balance -= validItems.Price * quantity;
-                return Message.Bought;
+                if (validItems.Quantity >= quantity)
+                {
+                    var hasUserEnoughMoney = quantity * validItems.Price <= user.Balance;
+                    if (!hasUserEnoughMoney)
+                    {
+                        return Message.InvalidBalance;
+                    }
+
+                    validItems.Quantity -= quantity;
+                    user.Balance -= validItems.Price * quantity;
+                    return Message.Bought;
+                }
+
+                if (validItems.Quantity == 0)
+                {
+                    return Message.SoldOut;
+                }
+
+                return Message.TooHigh;
             }
-            else
-            {
-                return Message.NotFound;
-            }
+
+            return Message.NotFound;
         }
 
         public string AddItem(string name, int quantity)
