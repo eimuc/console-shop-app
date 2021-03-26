@@ -7,7 +7,7 @@ A .NET console application, written in C#.
   - App runs until `exit` is typed or `Exception` is cought;
   - Shop sells Books, Cups, Pencils.
   - Items has names, quantities;
-  - User starts with 400£ balance;
+  - User starts with 100£ balance;
   - App does not allow negative quantities or balance;
 
 
