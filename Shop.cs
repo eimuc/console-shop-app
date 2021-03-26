@@ -23,5 +23,23 @@ namespace ConsoleShopApp
 
             return itemList.Length > 0 ? itemList.ToString() : "\nThere not any items at the shop!";
         }
+        public string BuyItem(string name, int quantity)
+        {
+            return "";
+        }
+        public string AddItem(string name, int quantity)
+        {
+            var toAdd = Items.Find(item =>
+                item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+
+            if (toAdd != null)
+            {
+                toAdd.Quantity += quantity;
+                
+                return Message.ItemAdded;
+            }
+
+            return Message.ItemNotAdded;
+        }
     }
 }
