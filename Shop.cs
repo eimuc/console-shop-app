@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleShopApp
 {
     public class Shop
     {
         public List<Item> Items { get; set; }
+
         public Shop()
         {
             Items = new List<Item>();
         }
+
         public string ListItem()
         {
             var itemList = new StringBuilder();
@@ -23,37 +24,24 @@ namespace ConsoleShopApp
 
             return itemList.Length > 0 ? itemList.ToString() : "\nThere not any items at the shop!";
         }
+
         public string BuyItem(User user, string name, int quantity)
         {
             var validItems = Items.Find(item =>
                 item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-            if (validItems != null)
+            if (validItems.Quantity >= quantity)
             {
-                if (validItems.Quantity >= quantity)
-                {
-                    var userValidBalance = quantity * validItems.Price <= user.Balance;
-
-                    if (!userValidBalance)
-                    {
-                        return Message.InvalidBalance;
-                    }
-
-                    validItems.Quantity -= quantity;
-                    user.Balance -= validItems.Price * quantity;
-                    return Message.Bought;
-                }
-
-                if (validItems.Quantity == 0)
-                {
-                    return Message.SoldOut;
-                }
-
-                return Message.TooHigh;
+                validItems.Quantity -= quantity;
+                user.Balance -= validItems.Price * quantity;
+                return Message.Bought;
             }
-
-            return Message.NotFound;
+            else
+            {
+                return Message.NotFound;
+            }
         }
+
         public string AddItem(string name, int quantity)
         {
             var validItems = Items.Find(item =>
@@ -62,7 +50,7 @@ namespace ConsoleShopApp
             if (validItems != null)
             {
                 validItems.Quantity += quantity;
-                
+
                 return Message.Added;
             }
 

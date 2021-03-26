@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleShopApp
+﻿namespace ConsoleShopApp
 {
     public class Message
     {
-        public const string Welcome = "==========================================" + "\n" + "\tWelcome to the Console Shop!" + 
+        public const string Welcome = "==========================================" + "\n" + "\tWelcome to the Console Shop!" +
             "\n" + "==========================================" + "\n" + "\n" + "\n" + "Type \"commands\" or \"exit\":" +
             "\n" + "\n" + "\n";
+
         public const string Commands = "\n1. itemlist\n2. buy name quantity\n3. add name quantity\n" +
             "4. balance\n5. topup quantity\n\n";
+
         public const string UndefinedCommand = "\nInccorect command, please try again!\n";
         public const string Added = "\nItem was successfully added!\n";
         public const string NotFound = "\nItem not found!\n";
