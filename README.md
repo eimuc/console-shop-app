@@ -4,7 +4,7 @@ A .NET console application, written in C#.
 
 #### About:
 
-  - App runs until `exit` is typed or `Exception` is cought;
+  - App runs until `exit` is typed or `Exception` is caught;
   - Shop sells Books, Cups, Pencils.
   - Items has names, quantities;
   - User starts with 100£ balance;
